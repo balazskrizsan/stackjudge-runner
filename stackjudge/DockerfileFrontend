@@ -1,0 +1,9 @@
+FROM node:14.17.0-alpine as build-step
+RUN     mkdir -p /project/frontend
+WORKDIR /project/frontend
+COPY    ./frontend /project/frontend
+RUN     npm install
+RUN     npm run build --prod
+
+FROM nginx:1.20.1
+COPY --from=build-step /project/frontend/dist/sj /usr/share/nginx/html

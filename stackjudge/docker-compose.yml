@@ -1,0 +1,66 @@
+version: "3.9"
+services:
+  angular-service:
+    container_name: stack_judge_frontend
+    build:
+      context: .
+      dockerfile: ./DockerfileFrontend
+    ports:
+      - "80:${FRONTEND_CONTAINER_POST}"
+    depends_on:
+      - stack_judge_backend
+
+  backend:
+    container_name: stack_judge_backend
+    ports:
+      - "${SERVER_PORT}:${SERVER_CONTAINER_PORT}"
+    build:
+      context: .
+      dockerfile: DockerfileBackend
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      .env
+    environment:
+      - SERVER_PORT=${SERVER_PORT}
+      - SERVER_ENV=${SERVER_ENV}
+      - HEALTH_CHECK_ENV_VAR_TEST=${HEALTH_CHECK_ENV_VAR_TEST}
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - IS_SEARCH_BOX_LOG_ENABLED=${IS_SEARCH_BOX_LOG_ENABLED}
+      - ENV_SEARCHLY_URL=${ENV_SEARCHLY_URL}
+      - HTTP_CORS_ORIGINS=${HTTP_CORS_ORIGINS}
+      - AWS_S3_CDN_BUCKET=${AWS_S3_CDN_BUCKET}
+      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
+      - AWS_SECRET_KEY=${AWS_SECRET_KEY}
+      - FACEBOOK_CLIENT_ID=${FACEBOOK_CLIENT_ID}
+      - FACEBOOK_CLIENT_SECRET=${FACEBOOK_CLIENT_SECRET}
+      - FACEBOOK_CALLBACK_URL=${FACEBOOK_CALLBACK_URL}
+      - AUTH_JWT_SECRET=${AUTH_JWT_SECRET}
+      - SITE_DOMAIN=${SITE_DOMAIN}
+      - SERVER_SSL_ENABLED=${SERVER_SSL_ENABLED}
+      - SITE_FRONTEND_DOMAIN=${SITE_FRONTEND_DOMAIN}
+      - SPRING_REDIS_HOST=${SPRING_REDIS_HOST}
+      - SPRING_REDIS_PASSWORD=${SPRING_REDIS_PASSWORD}
+      - SPRING_REDIS_PORT=${SPRING_REDIS_PORT}
+      - GOOGLE_MAPS_KEY=${GOOGLE_MAPS_KEY}
+      - REDIS_ASPECT_CACHE_ENABLED=${REDIS_ASPECT_CACHE_ENABLED}
+
+  postgres:
+    image: "postgres:13"
+    #volumes:
+      #- ./postgres.conf:/etc/postgresql/postgresql.conf
+      #- ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      # - ./data:/var/lib/postgresql/data
+    container_name: stack_judge_postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - PGDATA=${PGDATA}
+
+  redis:
+    image: "redis:6.2.6"
+    container_name: stack_judge_redis
