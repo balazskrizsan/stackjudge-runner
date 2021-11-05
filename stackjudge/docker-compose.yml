@@ -1,14 +1,21 @@
 version: "3.9"
 services:
-  angular-service:
+
+  frontend:
     container_name: stack_judge_frontend
+    ports:
+      - "80:${FRONTEND_CONTAINER_POST}"
     build:
       context: .
       dockerfile: ./DockerfileFrontend
-    ports:
-      - "80:${FRONTEND_CONTAINER_POST}"
+      args:
+        - FRONTEND_CONFIG=${FRONTEND_CONFIG}
     depends_on:
       - stack_judge_backend
+    env_file:
+      .env
+    environment:
+      - FRONTEND_CONFIG=${FRONTEND_CONFIG}
 
   backend:
     container_name: stack_judge_backend
