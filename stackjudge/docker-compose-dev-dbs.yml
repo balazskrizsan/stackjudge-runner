@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+
+  postgres_dev:
+    image: "postgres:13"
+    container_name: stackjudge_postgres_dev
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin_pass
+      - POSTGRES_DB=stackjudge
+      - PGDATA=/data/postgres
+    ports:
+      - "54320:5432"
+
+  postgres_dev_test:
+    image: "postgres:13"
+    container_name: stackjudge_postgres_dev_test
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin_pass
+      - POSTGRES_DB=stackjudge
+      - PGDATA=/data/postgres
+    ports:
+      - "54321:5432"
+
+  redis_dev:
+    image: "redis:6.2.6"
+    container_name: stackjudge_redis_dev
+    build:
+      context: .
+    ports:
+      - "63790:6379"
+
+  redis_dev_test:
+    image: "redis:6.2.6"
+    container_name: stackjudge_redis_dev_test
+    build:
+      context: .
+    ports:
+      - "63791:6379"
