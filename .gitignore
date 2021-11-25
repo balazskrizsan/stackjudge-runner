@@ -5,6 +5,13 @@ stackjudge/backend/*
 !stackjudge/backend/.gitkeep
 stackjudge/frontend/*
 !stackjudge/frontend/.gitkeep
+stackjudge/aws/*
+!stackjudge/aws/.gitkeep
+stackjudge/aws_sdk/*
+!stackjudge/aws_sdk/.gitkeep
+stackjudge/aws_sdk_java/*
+!stackjudge/aws_sdk_java/.gitkeep
+!stackjudge/aws_sdk_java/code
 
 ### DEFAULT
 HELP.md
