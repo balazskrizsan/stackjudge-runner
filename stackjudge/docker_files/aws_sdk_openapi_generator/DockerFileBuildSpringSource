@@ -1,0 +1,20 @@
+FROM gradle:6.9.1-jdk17-alpine as generate
+
+COPY    --chown=gradle:gradle aws_sdk_generator /aws_sdk_generator
+WORKDIR /aws_sdk_generator
+RUN     gradle openApiGenerate --no-daemon
+#RUN     cd /aws_sdk_template && ls -halR
+
+FROM maven:3.8.4-openjdk-11 as build
+
+COPY    --from=generate /aws_sdk_generator/build /aws_sdk_code/
+WORKDIR /aws_sdk_code
+RUN     mvn clean install
+
+FROM openjdk:11 as code
+
+COPY    --from=build /aws_sdk_code/target /aws_sdk_run/
+COPY    --from=build /aws_sdk_code        /aws_sdk_all/
+WORKDIR /aws_sdk_run
+
+ENTRYPOINT ["java", "-jar", "openapi-spring-1.0-SNAPSHOT.jar"]
