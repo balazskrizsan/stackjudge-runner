@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 63791, host: 63791, host_ip: "127.0.0.1"
   config.vm.synced_folder ".", "/vagrant_data"
   config.vm.provider "virtualbox" do |vb|
-    vb.memory = "4096"
+    vb.memory = "6144"
   end
   config.vm.provision "shell", inline: <<-SHELL
     echo "===== Update ================================================================================================"
@@ -37,13 +37,23 @@ Vagrant.configure("2") do |config|
     DOCKER_COMPOSE_VERSION=$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | jq .name -r)
     curl -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
-        
-    echo "===== Docker versions ======================================================================================="
+
+    echo "===== Installing nodejs ======================================================================================"
+    apt install -y nodejs
+
+    echo "===== Installing npm =--====================================================================================="
+    apt install -y npm
+
+    echo "===== Versions =============================================================================================="
 
     echo "-- Docker version:"
     docker --version
     echo "-- Docker-compose version:"
     docker-compose --version
+    echo "-- nodejs version:"
+    node -v
+    echo "-- npm version:"
+    npm -v
     echo "-- Docker status:"
     systemctl status docker
 
