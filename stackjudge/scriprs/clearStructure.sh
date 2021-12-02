@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "== Clear folder structure ======================================================================================="
+
 rm -rf ./../frontend
 mkdir  ./../frontend
 
