@@ -6,8 +6,8 @@ services:
     ports:
       - "80:${FRONTEND_CONTAINER_POST}"
     build:
-      context: .
-      dockerfile: ./DockerfileFrontend
+      context: ./..
+      dockerfile: ./docker_files/frontend/Dockerfile
       args:
         - FRONTEND_CONFIG=${FRONTEND_CONFIG}
     depends_on:
@@ -22,8 +22,8 @@ services:
     ports:
       - "${SERVER_PORT}:${SERVER_CONTAINER_PORT}"
     build:
-      context: .
-      dockerfile: DockerfileBackend
+      context: ./..
+      dockerfile: ./docker_files/backend/Dockerfile
     depends_on:
       - postgres
       - redis
@@ -62,6 +62,8 @@ services:
       #- ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
       # - ./data:/var/lib/postgresql/data
     container_name: stack_judge_postgres
+    env_file:
+      .env
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}

@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+
+  aws_sdk:
+    container_name: stackjudge_aws_sdk
+    build:
+      context: ..
+      dockerfile: ../docker_files/aws_sdk_openapi_generator/DockerFileBuildSpringSource
+    volumes:
+      - aws_sdk1:/aws_sdk_run
+      - aws_sdk2:/aws_sdk_all
+
+volumes:
+  aws_sdk1:
+  aws_sdk2:
