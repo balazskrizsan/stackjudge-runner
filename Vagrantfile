@@ -44,6 +44,12 @@ Vagrant.configure("2") do |config|
     echo "===== Installing npm ========================================================================================"
     apt install -y npm
 
+    echo "===== Installing AutoRest ==================================================================================="
+    npm install -g autorest
+
+    echo "===== Installing OpenJDK 11 ================================================================================="
+    apt-get install openjdk-11-jdk
+
     echo "===== Versions =============================================================================================="
 
     echo "-- Docker version:"
@@ -54,6 +60,10 @@ Vagrant.configure("2") do |config|
     node -v
     echo "-- npm version:"
     npm -v
+    echo "-- AutoRest version:"
+    autorest --version
+    echo "-- Java version:"
+    java -version
     echo "-- Docker status:"
     systemctl status docker
 
