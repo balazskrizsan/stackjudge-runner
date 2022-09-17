@@ -23,6 +23,28 @@ services:
     ports:
       - "54321:5432"
 
+  postgres_ids_dev:
+    image: "postgres:14"
+    container_name: stackjudge_postgres_ids_dev
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin_pass
+      - POSTGRES_DB=stackjudge
+      - PGDATA=/data/postgres
+    ports:
+      - "54322:5432"
+
+  postgres_ids_dev_test:
+    image: "postgres:14"
+    container_name: stackjudge_postgres_ids_dev_test
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin_pass
+      - POSTGRES_DB=stackjudge
+      - PGDATA=/data/postgres
+    ports:
+      - "54323:5432"
+
   redis_dev:
     image: "redis:6.2.6"
     container_name: stackjudge_redis_dev
