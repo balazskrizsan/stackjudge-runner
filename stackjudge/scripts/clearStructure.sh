@@ -18,3 +18,6 @@ rm -rf ./../aws_sdk_java/code
 
 rm -rf ./../aws_sdk_generator
 mkdir  ./../aws_sdk_generator
+
+rm -rf ./../notification
+mkdir  ./../notification
