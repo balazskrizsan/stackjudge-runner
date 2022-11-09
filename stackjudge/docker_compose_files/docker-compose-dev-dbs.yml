@@ -1,9 +1,9 @@
 version: "3.9"
 services:
 
-  postgres_dev:
+  sj_backend_postgres_dev:
     image: "postgres:14"
-    container_name: stackjudge_postgres_dev
+    container_name: sj_backend_postgres_dev
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin_pass
@@ -12,9 +12,9 @@ services:
     ports:
       - "54320:5432"
 
-  postgres_dev_test:
+  sj_backend_postgres_dev_test:
     image: "postgres:14"
-    container_name: stackjudge_postgres_dev_test
+    container_name: sj_backend_postgres_dev_test
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin_pass
@@ -23,9 +23,9 @@ services:
     ports:
       - "54321:5432"
 
-  postgres_ids_dev:
+  sj_ids_postgres_dev:
     image: "postgres:14"
-    container_name: stackjudge_postgres_ids_dev
+    container_name: sj_ids_postgres_dev
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin_pass
@@ -34,9 +34,9 @@ services:
     ports:
       - "54322:5432"
 
-  postgres_ids_dev_test:
+  sj_ids_postgres_dev_test:
     image: "postgres:14"
-    container_name: stackjudge_postgres_ids_dev_test
+    container_name: sj_ids_postgres_dev_test
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin_pass
@@ -45,14 +45,14 @@ services:
     ports:
       - "54323:5432"
 
-  redis_dev:
+  sj_backend_redis_dev:
     image: "redis:6.2.6"
-    container_name: stackjudge_redis_dev
+    container_name: sj_backend_redis_dev
     ports:
       - "63790:6379"
 
-  redis_dev_test:
+  sj_backend_redis_dev_test:
     image: "redis:6.2.6"
-    container_name: stackjudge_redis_dev_test
+    container_name: sj_backend_redis_dev_test
     ports:
       - "63791:6379"
