@@ -1,3 +1,12 @@
+# Apps
+
+| App name                 |          Clean          | Short  | App dev port | PSQL dev                                   | PSQL test                                       |
+|--------------------------|:-----------------------:|--------|--------------|--------------------------------------------|-------------------------------------------------|
+| StackJudge Backend       |   stackjudge_backend    | sj_be  |              |                                            |                                                 |
+| StackJudge Frontend      |   stackjudge_frontend   | sj_fe  |              |                                            |                                                 |
+| StackJudge AWS           |     stackjudge_aws      | sj_aws | :83          | sj_aws_postgres_dev:54324 admin@admin_pass | sj_ids_postgres_dev_test:54325 admin@admin_pass |
+| StackJudge Notifications | stackjudge_notifictions | sj_no  |              |                                            |                                                 |
+| StackJudge Identity      |   stackjudge_identity   | sj_ids |              |                                            |                                                 |
 
 # Docker commands
 
