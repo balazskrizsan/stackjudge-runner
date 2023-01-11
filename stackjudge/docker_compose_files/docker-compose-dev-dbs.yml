@@ -45,6 +45,28 @@ services:
     ports:
       - "54323:5432"
 
+  sj_aws_postgres_dev:
+    image: "postgres:14"
+    container_name: sj_aws_postgres_dev
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin_pass
+      - POSTGRES_DB=stackjudge
+      - PGDATA=/data/postgres
+    ports:
+      - "54324:5432"
+
+  sj_aws_postgres_dev_test:
+    image: "postgres:14"
+    container_name: sj_aws_postgres_dev_test
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin_pass
+      - POSTGRES_DB=stackjudge
+      - PGDATA=/data/postgres
+    ports:
+      - "54325:5432"
+
   sj_backend_redis_dev:
     image: "redis:6.2.6"
     container_name: sj_backend_redis_dev
