@@ -8,5 +8,5 @@ COPY    ./frontend /project/frontend
 RUN     npm install
 RUN     node_modules/@angular/cli/bin/ng build --configuration=$FRONTEND_CONFIG
 
-FROM nginx:1.20.1
+FROM nginx:1.25.4
 COPY --from=build-step /project/frontend/dist/sj /usr/share/nginx/html
